@@ -55,7 +55,103 @@ price decimal(6,2) not null,
 desce varchar(750) null
 );
 
- 
+#4. Autoincrement , primary key
+create table tutorials_tbl(
+tutorial_id int not null auto_increment,
+tutorial_title varchar(100) not null,
+tutorial_author varchar(40) not null,
+submission_date date,
+primary key(tutorial_id)
+);
+
+desc tutorials_tbl;
+
+#5. using default values
+create table Customer(
+First_Name char(50),
+Last_Name char(50),
+Address char(50),
+City char(50),
+Country char(25) default 'United States',
+Birth_Date datetime
+);
+
+#6. using enum
+#Primary key - just one key, but can also combine multiple column to form a primary key
+#multiple unique keys could be present
+
+create table contenttype(
+contenttypeid int unsigned not null auto_increment,
+class varbinary(50) not null,
+packageid int unsigned not null,
+canplace enum('0','1') not null default '0',
+cansearch enum('0','1') not null default '0',
+primary key content(contenttypeid, packageid),
+unique key packageclass(packageid, class)
+);
+#Varbinary similar to VARCHAR type, but stores binary type strings rather than non-binary character strings
+
+#7. using int and decimal
+create table test(
+stiny tinyint signed,
+utiny tinyint unsigned,
+salary decimal(6,2)
+);
+
+#8. Boolean data types
+create table if not exists users(
+id int auto_increment primary key,
+name varchar(100) not null,
+biography text,
+weight decimal(5,2),
+married boolean,
+regdate datetime
+);
+
+#10. Rename table
+rename table users to user;
+desc user;
+
+
+##### ALTER TABLE ######
+
+#11.
+
+alter table student add marks int after name;
+desc student;
+
+#add in first position
+alter table student add panno int first;
+desc student;
+
+alter table student drop age;
+desc student;
+
+show columns from student;
+
+#modify column attributes
+alter table student modify name varchar(30) not null;
+
+#adding not null constraint
+alter table student change panno pan_no int not null;
+
+#change datatype
+alter table student modify name char(30) not null;
+
+#Rename the table
+alter table student rename students;
+
+alter table customer modify country char(25) default 'United States';
+
+
+#--------------TRUNCATE TABLE-------------------
+truncate table user;
+
+#--------------DROP TABLE----------------
+drop table contenttype;
+
+#-------------AUTO INCREMENT-----------------------
+
 
 
 
