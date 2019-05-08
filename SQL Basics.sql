@@ -150,7 +150,53 @@ truncate table user;
 #--------------DROP TABLE----------------
 drop table contenttype;
 
-#-------------AUTO INCREMENT-----------------------
+#-------------INDEXING-----------------------
+create table dept(
+deptId int,
+dname varchar(10)
+);
+
+create index index1 on dept(deptId);
+#show index
+show index from dept;
+#drop index
+drop index index1 on dept;
+
+create index index1 on dept(deptId,dname);
+show index from dept;
+drop index index1 on dept;
+
+#creating index based on first n characters
+
+create index index_name on student(StudentName(5)); #for first 5 characters
+create index index_name1 on student(StudentName);	#search for entire name
+alter table student add index(StudentName(3)); 	#
+show index from student;
+
+drop index StudentName_5 on student;
+
+#------------------CASCADE and DELETE--------------------------
+
+create table customer(
+id int not null auto_increment,
+firstname varchar(50) not null,
+lastname varchar(50) not null,
+primary key(id)
+);
+
+create table contact(
+contact_id int,
+customer_id int,
+info varchar(50) not null,
+foreign key(customer_id)
+references customer(id)
+on delete cascade
+on update cascade
+);
+
+
+
+
 
 
 
